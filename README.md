@@ -1,5 +1,5 @@
-# Sorting-Competition-Materials-2024
-Materials and results for the UMN Morris CSci 3501 sorting competition Fall 2024
+# Sorting-Competition-Materials-2026
+Materials and results for the UMN Morris CSci 3501 sorting competition Fall 2026
 
 # Table of contents
 * [Goal of the competition](#goal)
@@ -19,87 +19,115 @@ The Sorting Competition is a multi-lab exercise on developing the fastest sortin
 
 ## The data  <a name="data"></a>
 
-You are sorting permutations of numeric elements (for a reminder of the definition of *permuation* see below).  
+You are sorting binary strings that encode a numeric value in a rather unusual way. (details below)  
 
-The data will be provided as a text file-- each line will contain a comma separated list of values ranging from 1 to $n$ where $n$ is the number of elements in that list.  In any given line there will no repeated values.  Not all lines will have the same number of elements.  The number of elements in each line will produced using the ceiling of an **exponential distribution** with a **rate parameter** ranging from 0.001 to 0.1.  (If that doesn't mean much to you, that's okay-- it just means that shorter sequences are more likely than longer sequences and *really long* sequences are vanishingly rare... feel free to probe the data to get a better idea of its characteristics) 
+The data will be provided as a text file-- each line will contain a string of 0's and 1's.  The number of characters in each line will be produced using an **exponential distribution** with a **rate parameter** ranging from 0.001 to 0.1.  (If that doesn't mean much to you, that's okay-- it just means that shorter sequences are more likely than longer sequences and *really long* sequences are vanishingly rare... feel free to probe the data to get a better idea of its characteristics) 
 
 The output should be a similar text file, but with the sequences ordered using the procedure outlined below.  A text file could have anywhere from 100,000 to 1,000,000 entries
 
 For example one might see the first few lines in the data file as
 
 ```
-3,1,2
-1,2,3
-1,5,3,2,4
+1101101
+1101
+100000
+11111
     .
     .
     .
 ```
 
+## The value of a string
+
+Each binary string encodes a **set of distinct odd integers**.  The value of that string is the sum of those odd integers.  Each `1` in the string represents a different odd integer.  To determine that integer index (0-based) the locations in the string starting at the right-most end of the string.  If a `1` occurs at index $i$, then the encoded odd-integers is $2i+1$.  This is easiest to see with an example.  Let's consider the string "1011010".  It represents the odd integers 3, 7, 9, and 13 (see below) and thus has the value 3+7+9+13 = 32
+
+```
+Binary String || 1 | 0 | 1 | 1 | 0 | 1 | 0
+        index || 6 | 5 | 4 | 3 | 2 | 1 | 0
+  odd integer || 13| 11| 9 | 7 | 5 | 3 | 1
+  ---------------------------------------------
+        value || 13    + 9 + 7     + 3   = 32
+```
+
+
 ## Comparing Sequences
 
-Two sequences, $A = (a_1, a_2, \ldots, a_n)$, and $B = (b_1, b_2, \ldots, b_m)$ are ordered as follows:
+Two binary strings $A$ and $B$ are ordered as follows
 
-1. $A < B$ if $a_1 < b_1$
-2. $A > B$ if $a_1 > b_1$
-3. If $a_1 = b_1$ then repeat these steps using the next entries in the sequences (ie using $a_2 and b_2$)
+1. $A < B$ if the $\textrm{value}$ represented by $A$ is less than the $\textrm{value}$ represented by $B$
+2. $A < B$ if the **number of ones** in $A$ is less than the **number of ones** in $B$
+3. $A < B$ if the **length** of $A$ is less than the length of $B$
+4. $A < B$ if $A$ is alphabetically before $B$
 
-As we continue in this fashion only one of three things can occur:
+Note that this criteria are applied in the order given-- so don't proceed to criterion 2 unless the values of $A$ and $B$ are equal.
 
-1. We encounter $a_i \ne b_i$, in which case $A\lt B$ if $a_i \lt b_i$ and $A\gt B$ if $a_i \gt b_i$
-2. The two sequences are of the same length and have all the same values (this means $A$=$B$)
-3. The shorter sequence is identical to the longer for all the *shorter* sequences entries. (this is a tie-- see below for tie-breaking)
-
-### Tie breaking
-
-In the event of a tie we compare the number of **even** values in A and in B.  The sequence with the lowest number of evens comes before the one with the larger number of evens.
-
-In the event of ANOTHER tie, we compare the number of **odd** values in $A$ and $B$.  The one with the **highest** number of odds comes *before* the one with the lower number of odds.
 
 ### Examples
 
-Let's see this in action:
+Let's see this in action, the strings in the table below are used in `Group0.java` as tests.  We have calculated some key characteristics for their comparison:
 
-* Comparing $A=(1,3,2,4)$ to $B=(1,2,3)$
+String     | Calculation      | Value    | # of ones | Length
+-----------|------------------|----------|-----------|--------
+"101101"   | 1 + 5 + 7 + 11   |   24     | 4         | 6
+"110011"   | 1 + 3 + 9 + 11   |   24     | 4         | 6
+"10010000" | 9 + 15           |   24     | 2         | 8
+"1100000"  | 11 + 13          |   24     | 2         | 7
+"11111"    |1 + 3 + 5 + 7 + 9 |   25     | 5         | 5
 
-1. **First Position:** We start by comparing their first entries. Both entries are 1 so we move to the next position
-2. **Second position:** Here we see that $3 > 2$.  
+#### Comparing 101101 to 11111
 
-**Therefore: $A > B$**
+* First criterion is value.  
+     * The value of "101101" is 24 
+     * the value of "11111" is 25
+* So "101101" < "11111"
 
-* Comparing $A=(1,3,2,4)$ to $B=(1,3,2)$
+#### Comparing 101101 to 10010000
 
-1. **First Position:** We start by comparing their first entries. Both entries are 1 so we move to the next position
-2. **Second Position:** Both entries are 3 so we move to the next position
-3. **Third Position:** Both entries are 2.  We can't move to the entry because $B$ has run out of entries.
-4. **First Tie-Breaker:** Sequence $A$ has 2 even numbers, while sequence $B$ only has 1.  
+* First criterion is value.  
+     * The value of "101101" is 24 
+     * the value of "10010000" is 24
+     * Tied
+* The second criterion is # of ones
+     * "101101" has 4 ones
+     * "10010000" has 2 ones
+* So "10010000" < "101101"
 
-**Therefore: $A>B$**
+#### Comparing 101101 to 110011
 
-* Comparing $A=(1,3,2,4,5)$ to $B=(1,3,2,4)$
+* First criterion is value.  
+     * The value of "101101" is 24 
+     * the value of "110011" is 24
+     * Tied
+* The second criterion is # of ones
+     * "101101" has 4 ones
+     * "110011" has 4 ones
+     * Tied
+* The third criterion is length
+     * "101101" has length 6
+     * "110011" has length 6
+     * Tied
+* The fourth criterion is alphabetical order
+     * "101101" < "110011"  alphabetically
+* So "101101" < "110011"
 
-1. **First Position:** Both entries are 1 so we move to the next position
-2. **Second Position:** Both entries are 3 so we move to the next position
-3. **Third Position:** Both entries are 2 so we move to the next position
-4. **Fourth Postion:** Both entries are 4, but we can't move to the entry because $B$ has run out of entries.
-5. **First Tie-Breaker:** Sequence $A$ has 2 even numbers, and sequence $B$ also has 2 even numbers.  Thus we must move to the second tie-breaker.
-6. **Second Tie-Breaker:** Sequence $A$ has 3 odd numbers while sequence $B$ has 2.  
+#### Comparing 10010000 to 1100000
 
-**Therefore: $A < B$** (remember the second tie-breaker is won by the sequence with the *fewest* number of odd entries)
+* First criterion is value.       
+     * the value of "10010000" is 24
+     * the value of "1100000" is 24
+     * Tied
+* The second criterion is # of ones
+     * "10010000" has 2 ones
+     * "1100000" has 2 ones
+     * Tied
+* The third criterion is length:
+     *"10010000" has length 8
+     * "1100000" has length 7
+* So "1100000" < "10010000" 
 
-### Permutations
+Please note that the binary strings your program will be processing for the competition will be much longer than these.
 
-Here's a brief reminder of the meaning of permutation:
-
-A **permutation** of a set is a *specific ordering* of the elements of that set.  So if, for example, the set was $\{1, 2, 3, \}$ then there are 6 distinct permutations of that set:
-
-1. `123`
-2. `132`
-3. `213`
-4. `231`
-5. `312`
-6. `321`
-
+The file `SmallData.txt` will have a collection of shorter, human parsable examples so you can make sure everything is working correctly.
 
 ## Setup for sorting <a name="setup"></a>
 
