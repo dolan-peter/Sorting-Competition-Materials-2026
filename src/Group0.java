@@ -23,13 +23,13 @@ public class Group0 {
 		}
 
 		String inputFileName = args[0];
-		String outFileName = args[1];
+		String outFileName   = args[1];
 		
 		// Uncomment to test comparator methods
 
-		int [][] data = readData(inputFileName); // read data as strings
+		String [] data = readData(inputFileName); // read data as strings
 		
-		int [][] toSort = data.clone(); // clone the data
+		String [] toSort = data.clone(); // clone the data
 
 		sort(toSort); // call the sorting method once for JVM warmup
 		
@@ -50,19 +50,18 @@ public class Group0 {
 	}
 
 
-	private static int [][] readData(String inputFileName) throws FileNotFoundException {
-		ArrayList<int[]> input = new ArrayList<>();
+	private static String [] readData(String inputFileName) throws FileNotFoundException {
+		ArrayList<String> input = new ArrayList<>();
 		Scanner in = new Scanner(new File(inputFileName));
 
 		while (in.hasNext()) {
-			String str = in.next();
-			input.add(Arrays.stream(str.split(",")).mapToInt(Integer::parseInt).toArray());
+			input.add(in.next());
 		}
 
 		in.close();
 
 		// the string array is passed just so that the correct type can be created
-		return input.toArray(new int[0][]);
+		return input.toArray(new String [0]);
 	}
 
 	// YOUR SORTING METHOD GOES HERE.
@@ -70,113 +69,83 @@ public class Group0 {
 	// Note: you may change the return type of the method.
 	// You would need to provide your own function that prints your sorted array to
 	// a file in the exact same format that my program outputs
-	private static void sort(int [][] toSort) {
+	private static void sort(String [] toSort) {
 		Arrays.sort(toSort, new SortingCompetitionComparator());
 	}
 
-	private static class SortingCompetitionComparator implements Comparator<int []> {
-		
-		@Override
-		public int compare(int [] seq1, int [] seq2) {
-			// looking for different elements in the same positions
-			for (int i = 0; i < seq1.length && i < seq2.length ; ++i) {
-				int diff = seq1[i] - seq2[i];
-				if (diff != 0) return diff;
+	private static class SortingCompetitionComparator implements Comparator<String> {
+		private static int toVal(String seq){
+			int result = 0;
+			int n = seq.length();
+			int j = 1;
+			for(int i = n-1; i>=0; i--){
+				if(seq.charAt(i)=='1'){
+					result += 2*j-1;
+				}
+				j++;				
 			}
-			
-			// two sequences are identical:
-			if (seq1.length == seq2.length) return 0;
-			
-			// one sequence is a prefix of the other:
-			
-			// comparing even values:
-			int seq1_evens = 0;
-			for (int i = 0; i < seq1.length; ++i) {
-				if (seq1[i] % 2 == 0) seq1_evens++;
+
+			return result;
+		}
+		private static int countOnes(String seq){
+			int count = 0;
+			int n = seq.length();
+			for(int i = n-1; i>=0; i--){
+				if(seq.charAt(i)=='1'){
+					count++;
+				}			
 			}
-			
-			int seq2_evens = 0;
-			for (int i = 0; i < seq2.length; ++i) {
-				if (seq2[i] % 2 == 0) seq2_evens++;
-			}
-			
-			int diff = seq1_evens - seq2_evens;
-			if (diff != 0) return diff; 
-			
-			// return the negated difference of odds 
-			return (seq2.length - seq2_evens) - (seq1.length - seq1_evens);
+
+			return count;
 		}
 
+		@Override
+		public int compare(String seq1, String seq2) {
+			int val1 = toVal(seq1);
+			int val2 = toVal(seq2);
+			int count1 = countOnes(seq1);
+			int count2 = countOnes(seq2);
 
+			if(val1 != val2){
+				return val1 - val2; // Values are different
+			} 
+			
+			if(count1 != count2){
+				return count1 - count2; // # of ones are different
+			} 
+
+			if(seq1.length() != seq2.length()){
+				return seq1.length() - seq2.length(); // Strings are different lengths
+			}
+
+			return seq1.compareTo(seq2);
+		}
 
 		public static void runComparatorTests() {
-			int [] arr1 = {1, 3, 2};
-			int [] arr2 = {1, 2, 3};
+			String str24a = "101101";
+			String str24b = "110011";
+			String str24c = "10010000"; 
+			String str24d = "1100000"; 
+			String str25  = "11111";
+			System.out.println(toVal(str24a)); // Should get 1 + 5 + 7 + 11   = 24
+			System.out.println(toVal(str24b)); // Should get 1 + 3 + 9 + 11   = 24			 		
+			System.out.println(toVal(str24c)); // Should get 9 + 15           = 24			 		
+			System.out.println(toVal(str24d)); // Should get 13 + 11          = 24			 		
+			System.out.println(toVal(str25)); // Should get 1 + 3 + 5 + 7 + 9 = 25
+
 			System.out.println("Comparing arr1 and arr2");
-			System.out.println((new SortingCompetitionComparator()).compare(arr1, arr2));	
-			System.out.println((new SortingCompetitionComparator()).compare(arr2, arr1));
-			System.out.println((new SortingCompetitionComparator()).compare(arr1, arr1));
-			
-			int [] arr3 = {1, 3, 2, 5, 4};
-			
-			System.out.println("Comparing arr1 and arr3");
-			// arr3 should be larger:
-			System.out.println((new SortingCompetitionComparator()).compare(arr1, arr3));
-			System.out.println((new SortingCompetitionComparator()).compare(arr3, arr1));
-			
-			int [] arr4 = {1, 3, 2, 7, 6, 5, 4};
-			
-			System.out.println("Comparing arr1 and arr4");
-			// arr1 should be larger since they have the same number of evens, but the number
-			// of odds is higher in arr4, and the comparison goes the opposite way:
-			System.out.println((new SortingCompetitionComparator()).compare(arr1, arr4));
-			System.out.println((new SortingCompetitionComparator()).compare(arr4, arr1));
-			
-			System.out.println("Comparing arr4 and arr3");
-			System.out.println((new SortingCompetitionComparator()).compare(arr4, arr3));
-			
-			int [] arr5 = {1, 3, 2, 5, 6, 7, 4};
-			
-			System.out.println("Comparing arr1 and arr5");
-
-			System.out.println((new SortingCompetitionComparator()).compare(arr1, arr5));
-			System.out.println((new SortingCompetitionComparator()).compare(arr5, arr1));			
-			
-			System.out.println("Comparing arr5 and arr3");
-			System.out.println((new SortingCompetitionComparator()).compare(arr5, arr3));
-			
-			System.out.println("Comparing arr5 and arr4");
-			System.out.println((new SortingCompetitionComparator()).compare(arr5, arr4));
-			
-			int [] arr6 = {1, 3, 2, 6, 5, 7, 4};
-			System.out.println("Comparing arr1 and arr6");
-			System.out.println((new SortingCompetitionComparator()).compare(arr1, arr6));
-			
-			System.out.println("Comparing arr3 and arr6");
-			System.out.println((new SortingCompetitionComparator()).compare(arr3, arr6));
-			
-			System.out.println("Comparing arr5 and arr6");
-			System.out.println((new SortingCompetitionComparator()).compare(arr5, arr6));
-			
-			
-			System.out.println("Comparing arr4 and arr6");
-			System.out.println((new SortingCompetitionComparator()).compare(arr4, arr6));
-			 
-		}
-		
-
+			System.out.println((new SortingCompetitionComparator()).compare(str24a, str25)); //Neg	
+			System.out.println((new SortingCompetitionComparator()).compare(str24a, str24c)); //Pos
+			System.out.println((new SortingCompetitionComparator()).compare(str24a, str24b)); //Neg
+			System.out.println((new SortingCompetitionComparator()).compare(str24c, str24d)); //Pos
+		}		
 	}
 	
-	private static void writeOutResult(int [][] sorted, String outputFilename) throws FileNotFoundException {
+	private static void writeOutResult(String [] sorted, String outputFilename) throws FileNotFoundException {
 		PrintWriter out = new PrintWriter(outputFilename);
-		for (int [] s : sorted) {
-			for (int i = 0; i < s.length; ++i) {
-				out.print(s[i]+(i<s.length-1?",":""));
-			}
-			out.println();
+		for (String s : sorted) {			
+			out.println(s);
 		}
 		out.close();
-	}
-	
-	
+	}		
 }
