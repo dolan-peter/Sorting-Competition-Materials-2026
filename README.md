@@ -140,14 +140,14 @@ We consider one `long` to be the same as two `int` numbers, so you can store an 
 Strings use 16 bits (half of the size of an `int`) for *each* character and 16 bytes (128 bits) for the memory reference and other info for the string *itself*.  
 If in doubt about specific cases, please discuss with me. 
 
-The method in the [Group0.java](src/Group0.java) files that you may modify is the `sort` method. It must take an array of arrays of Integers (or ints) (for example, `int[][]`). 
+The method in the [Group0.java](src/Group0.java) files that you may modify is the `sort` method. It must take an array of Strings (for example, `String []`). 
 The method can sort in place (thus be `void`) or return type of the method can be what it is now or return the result in an array of another type.
 If you are returning an array, the following rules have to be followed:
-* Your `sort` method return type needs to be changed to whatever  array you are returning. Consequently you would need to change the call in `main` to store the resulting array. 
-* Your return type has to be an array (not an array list!) and it has to have one element per element of the original array. That element must contain the integer value(s) of the given element. 
-For example, you may create your own class (I will call it `Data` as an example) that has the `int` value of a number plus some other fields. Then you will be returning an array of `Data`. 
-You may not, however, create an array of just binary representations of all numbers, return that array, and convert back to decimal upon printing.   
-* If you are returning a different type of an array, such as `Data`, you need to supply a method to write out your resulting array into a file. The method will access the `int []` value field using a `get` method or directly (if it's accessible) and write it to a file. 
+* Your `sort` method return type needs to be changed to whatever array you are returning. Consequently you would need to change the call in `main` to store the resulting array. 
+* Your return type has to be an array (not an array list!) and it has to the length of the original array and contain the original values. 
+For example, you may create your own class (I will call it `Data` as an example) that has the `String` value of a binary string, plus some other fields, perhaps the `int` value of the binary string. Then you will be returning an array of `Data`. 
+You may not, however, create an array of just binary representations of all strings, return that array, and convert back to the original form for printing.   
+* If you are returning a different type of an array, such as `Data`, you need to supply a method to write out your resulting array into a file. The method will access the `String` value field using a `get` method or directly (if it's accessible) and write it to a file. 
 The file has to be exactly the same as in the prototype implementation; they will be compared using `diff` system command. 
 
 If you are not changing the return type, you don't need to modify anything other than `sort` method and any methods/classes called from it. 
@@ -175,13 +175,13 @@ I will post a script for running this program (with a correctness check and all)
 
 ##  Submision deadlines <a name="deadlines"></a>
 
-The first preliminary competition will be run on Thursday October 24th in the lab. The purpose of it is mostly to check the correctness and to get a sense for your timing. 
+The first preliminary competition will be run on Thursday October 29th in the lab. The purpose of it is mostly to check the correctness and to get a sense for your timing. 
 
-The second preliminary round will be in the lab on Monday November 4th (due Sunday Nov 3rd) 
+The second preliminary round will be in the lab on Monday November 9th (due Sunday Nov 8th) 
 
-The final competition will be on Thursday November 21st in the lab (due Sunday Nov 20th)
+The final competition will be on Thursday Dec 3rd in the lab (due Wednesday Dec 2nd)
 
-Your Presentations of your algorithm will also be Monday Nov. 21st.
+Your Presentations of your algorithm will be Dec 10th.
 
 The dates for other related assignments (code review and presentations) will be announced later. 
 
