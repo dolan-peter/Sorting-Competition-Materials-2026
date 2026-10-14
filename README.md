@@ -21,11 +21,15 @@ The Sorting Competition is a multi-lab exercise on developing the fastest sortin
 
 You are sorting binary strings that encode a numeric value in a rather unusual way. (details below)  
 
-The data will be provided as a text file-- each line will contain a string of 0's and 1's.  The number of characters in each line will be produced using an **exponential distribution** with a **rate parameter** ranging from 0.001 to 0.1.  (If that doesn't mean much to you, that's okay-- it just means that shorter sequences are more likely than longer sequences and *really long* sequences are vanishingly rare... feel free to probe the data to get a better idea of its characteristics) 
+The data will be provided as a text file-- each line will contain a string of 0's and 1's.  The number of characters in each line will be produced using a custom random process (you can see the details in `DataGenerator.java`.  The basic idea is that the class variables `shortLen` and `longLen` will control the production of string lengths:
 
-The output should be a similar text file, but with the sequences ordered using the procedure outlined below.  A text file could have anywhere from 100,000 to 1,000,000 entries
+* Roughly 25% of the lengths will be less than `shortLen`.  Those lengths will never be less than 4 and cluster closer to `shortLen`
+* Roughly 50% of the lengths will be between `shortLen` and `longLen`.  Those lengths will be selected at random uniformly
+* Roughly 25% of the lengths will be longer than `longLen`.  Those lengths are produced using an exponential distribution whose rate parameter is related to `longLen - shortLen` (in other words-- the longer the distance between those two values, the longer the lengths you can expect to see from the "long side" of the distribution.
 
-For example one might see the first few lines in the data file as
+The output will be a text file of binary strings separated by newline characters.  
+
+For example, using **much** smaller values of `shortLen` and `longLen` one might see the first few lines in the data file as
 
 ```
 1101101
@@ -36,6 +40,17 @@ For example one might see the first few lines in the data file as
     .
     .
 ```
+
+A good way to generate short data is to use
+
+* `shortLen`: 5
+* `longLen`: 8
+
+For the competition I'll likely be generating 50,000 binary strings using the following parameters:
+
+* `shortLen`: 500
+* `longLen`: 1000
+
 
 ## The value of a string
 
@@ -190,11 +205,11 @@ Here is where the results of the final competition will go:
 
 ## Round 1 arguments
 
-* `prelim1.txt`: 550,000 with 0.003
-* `prelim2.txt`: 600,000 with 0.02
+* `prelim1.txt`: 50,000 with `shortLen`= 500 and `longLen`=1000
+* `prelim1.txt`: 60,000 with `shortLen`= 500 and `longLen`=1000
 
 ## Round 2 arguments
 
-* `prelim1.txt`: 700000 with 0.01
-* `prelim2.txt`: 650000 with 0.03
+* `prelim1.txt`: TBD
+* `prelim2.txt`: TBD
 
