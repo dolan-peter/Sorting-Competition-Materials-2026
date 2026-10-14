@@ -13,8 +13,8 @@ import java.util.Random;
 public class DataGenerator {
 	private static int seed = 4242; // change the seed to get different data
 	private static Random r = new Random(seed);
-	private static double  shortLen = 5;
-	private static double  longLen  = 8;
+	private static double  shortLen = 500; //SmallData used 5
+	private static double  longLen  = 1000; //SmallData used 8
 
         public static String arrayToString(List<Integer> arr) { //Borrowed from https://www.geeksforgeeks.org/convert-array-of-integers-to-comma-separated-string/#
             // Variable to store the answer
