@@ -206,10 +206,14 @@ Here is where the results of the final competition will go:
 ## Round 1 arguments
 
 * `prelim1.txt`: 50,000 with `shortLen`= 500 and `longLen`=1000
-* `prelim1.txt`: 60,000 with `shortLen`= 500 and `longLen`=1000
+* `prelim1.txt`: 50,000 with `shortLen`= 500 and `longLen`=1000
+
+## Results of the first preliminary round
+
+
 
 ## Round 2 arguments
 
-* `prelim1.txt`: TBD
-* `prelim2.txt`: TBD
+* `prelim1.txt`: 100,000 with `shortLen`= 500 and `longLen`=1000
+* `prelim1.txt`: 100,000 with `shortLen`= 500 and `longLen`=1000
 
