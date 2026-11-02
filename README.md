@@ -190,17 +190,18 @@ I will post a script for running this program (with a correctness check and all)
 
 ##  Submision deadlines <a name="deadlines"></a>
 
-The first preliminary competition will be run on Thursday October 29th in the lab. The purpose of it is mostly to check the correctness and to get a sense for your timing. 
+The first preliminary competition was run on Thursday October 29th in the lab. The purpose of it is mostly to check the correctness and to get a sense for your timing. 
 
-The second preliminary round will be in the lab on Monday November 9th (due Sunday Nov 8th) 
+The second preliminary round will be in the lab on Monday November 11th (due Sunday Nov 10th) 
 
-The final competition will be on Thursday Dec 3rd in the lab (due Wednesday Dec 2nd)
+The final competition will be on Thursday Nov 26th in the lab (due Wednesday Nov 25th)
 
-Your Presentations of your algorithm will be Dec 10th.
+Your Presentations of your algorithm will be Dec 3rd.
 
 The dates for other related assignments (code review and presentations) will be announced later. 
 
 ## Results <a name="final"></a>
+
 Here is where the results of the final competition will go:
 
 ## Round 1 arguments
@@ -210,7 +211,13 @@ Here is where the results of the final competition will go:
 
 ## Results of the first preliminary round
 
+The results of the first preliminary round are posted in the folder [round1](round1). The folder [round1/bin](roudn1/bin) has all the .class files. Groups that didn't have a submission (or their submission didn't compile or would go into an infinite loop) show up as errors.
 
+Each data file was ran three times for each group, and the median result was used for scoring.
+
+The data files were: `prelim1.txt` and `prelim2.txt`. The correct output is in files `outRun1Group0.txt` and `outRun2Group0.txt`.
+
+The files `results1.txt` and `results2.txt` have the complete timing results for the two data sets. The file `scoreboard.txt` has the places that each team got.
 
 ## Round 2 arguments
 
