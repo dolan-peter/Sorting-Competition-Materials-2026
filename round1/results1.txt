@@ -1,0 +1,314 @@
+Running prelim1.txt
+
+
+ Group 0: 
+
+
+
+
+Median: 0.0
+Results of diff:
+
+
+ Group 1: 
+
+
+
+
+Median: 0.0
+Results of diff:
+
+
+ Group 2: 
+
+
+
+
+Median: 0.0
+Results of diff:
+
+
+ Group 3: 
+
+
+
+
+Median: 0.0
+Results of diff:
+
+
+ Group 4: 
+
+
+
+
+Median: 0.0
+Results of diff:
+
+
+ Group 5: 
+
+
+
+
+Median: 0.0
+Results of diff:
+
+Running prelim1.txt
+
+
+ Group 0: 
+
+3279
+
+3205
+
+3299
+
+Median: 3279.0
+Results of diff:
+
+
+ Group 1: 
+
+3309
+
+3050
+
+3245
+
+Median: 3245.0
+Results of diff:
+
+
+ Group 2: 
+
+148
+
+144
+
+152
+
+Median: 148.0
+Results of diff:
+
+
+ Group 3: 
+
+Time: 280
+outRun1Group3.txt
+
+Time: 280
+outRun1Group3.txt
+
+Time: 282
+outRun1Group3.txt
+
+Median: 0.0
+Results of diff:
+
+Files outRun1Group3.txt and outRun1Group0.txt differ
+
+ Group 4: 
+
+153
+
+167
+
+170
+
+Median: 167.0
+Results of diff:
+
+
+ Group 5: 
+
+3281
+
+2995
+
+3178
+
+Median: 3178.0
+Results of diff:
+
+Running prelim1.txt
+
+
+ Group 0: 
+
+3221
+
+3267
+
+3161
+
+Median: 3221.0
+Results of diff:
+
+
+ Group 1: 
+
+3035
+
+3328
+
+3329
+
+Median: 3328.0
+Results of diff:
+
+
+ Group 2: 
+
+152
+
+152
+
+153
+
+Median: 152.0
+Results of diff:
+
+
+ Group 3: 
+
+Time: 279
+outRun1Group3.txt
+
+Time: 284
+outRun1Group3.txt
+
+Time: 280
+outRun1Group3.txt
+
+Median: 0.0
+Results of diff:
+
+Files outRun1Group3.txt and outRun1Group0.txt differ
+
+ Group 4: 
+
+154
+
+162
+
+164
+
+Median: 162.0
+Results of diff:
+
+
+ Group 5: 
+
+3181
+
+3221
+
+3277
+
+Median: 3221.0
+Results of diff:
+
+
+ Group 6: 
+
+2516
+
+2357
+
+2522
+
+Median: 2516.0
+Results of diff:
+
+Running prelim1.txt
+
+
+ Group 0: 
+
+2739
+
+2952
+
+2949
+
+Median: 2949.0
+Results of diff:
+
+
+ Group 1: 
+
+3035
+
+2990
+
+3005
+
+Median: 3005.0
+Results of diff:
+
+
+ Group 2: 
+
+132
+
+132
+
+136
+
+Median: 132.0
+Results of diff:
+
+
+ Group 3: 
+
+Time: 255
+outRun1Group3.txt
+
+Time: 258
+outRun1Group3.txt
+
+Time: 255
+outRun1Group3.txt
+
+Median: 0.0
+Results of diff:
+
+Files outRun1Group3.txt and outRun1Group0.txt differ
+
+ Group 4: 
+
+152
+
+137
+
+140
+
+Median: 140.0
+Results of diff:
+
+
+ Group 5: 
+
+2955
+
+3017
+
+2908
+
+Median: 2955.0
+Results of diff:
+
+
+ Group 6: 
+
+2313
+
+2167
+
+2314
+
+Median: 2313.0
+Results of diff:
+
