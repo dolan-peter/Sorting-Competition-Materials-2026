@@ -190,13 +190,13 @@ I will post a script for running this program (with a correctness check and all)
 
 ##  Submision deadlines <a name="deadlines"></a>
 
-The first preliminary competition was run on Thursday October 29th in the lab. The purpose of it is mostly to check the correctness and to get a sense for your timing. 
+The first preliminary competition was run on Thursday October 29th in the lab. The purpose was mostly to check the correctness and to get a sense for your timing. 
 
-The second preliminary round will be in the lab on Monday November 11th (due Sunday Nov 10th) 
+The first round of competition will be in the lab on Thursday November 12th (due Wednesday Nov 11th) 
 
-The final competition will be on Thursday Nov 26th in the lab (due Wednesday Nov 25th)
+The final competition will be on Thursday Dec 3rd in the lab (due Wednesday Dec 2nd)
 
-Your Presentations of your algorithm will be Dec 3rd.
+Your Presentations of your algorithm will be Dec 10th.
 
 The dates for other related assignments (code review and presentations) will be announced later. 
 
@@ -204,12 +204,12 @@ The dates for other related assignments (code review and presentations) will be 
 
 Here is where the results of the final competition will go:
 
-## Round 1 arguments
+## Preliminary arguments
 
 * `prelim1.txt`: 50,000 with `shortLen`= 500 and `longLen`=1000
 * `prelim1.txt`: 50,000 with `shortLen`= 500 and `longLen`=1000
 
-## Results of the first preliminary round
+## Results of the preliminary round
 
 The results of the first preliminary round are posted in the folder [round1](round1). The folder [round1/bin](roudn1/bin) has all the .class files. Groups that didn't have a submission (or their submission didn't compile or would go into an infinite loop) show up as errors.
 
